@@ -29,3 +29,7 @@ Route::get('/categories', function () {
 
     // print_r(Category::all());
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
