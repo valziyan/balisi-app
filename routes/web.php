@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/categories', function () {
+
+    $categories = Category::where('name', 'components')->get();
+    // Select * from categories where name = 'components'
+
+    foreach($categories as $category) {
+        echo 'ID: ' . $category->id . 'Name: ' . $category->name . '<br>';
+    }
+
+    // print_r(Category::all());
 });
