@@ -31,5 +31,12 @@ Route::get('/categories', function () {
 });
 
 Route::get('/login', function () {
-    return view('login');
+
+    $categories = Category::where('name', 'components')->get();
+
+    return view('login', ['categories' => $categories]);
 });
+
+Route::get('/register', function () {
+    return view('register',);
+})->name('register');
