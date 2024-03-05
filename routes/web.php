@@ -29,3 +29,14 @@ Route::get('/categories', function () {
 
     // print_r(Category::all());
 });
+
+Route::get('/login', function () {
+
+    $categories = Category::where('name', 'components')->get();
+
+    return view('login', ['categories' => $categories]);
+});
+
+Route::get('/register', function () {
+    return view('register',);
+})->name('register');
