@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+
+// Models
+use App\Models\Category;
+    
 
 class CategoryController extends Controller
 {
@@ -12,17 +17,19 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        return view('category.index', ['categories' => $categories]);
+        
         // Select * from categories where name = 'components'
 
-        foreach($categories as $category) {
-            echo 'ID: ' . $category->id . 'Name: ' . $category->name . '<br>';
-            echo 'items: ' .'list of items <br>';
-            $items = $category->items()->get();
-            // print_r($items);
-            foreach($items as $item) {
-                echo 'items: ' . $item->name;
-            }
-        }
+        // foreach($categories as $category) {
+        //     echo 'ID: ' . $category->id . 'Name: ' . $category->name . '<br>';
+        //     echo 'items: ' .'list of items <br>';
+        //     $items = $category->items()->get();
+        //     // print_r($items);
+        //     foreach($items as $item) {
+        //         echo 'items: ' . $item->name;
+        //     }
+        // }
     }
 
     /**
@@ -30,7 +37,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return 'test';
+        return view('category.create');
     }
 
     /**
@@ -38,7 +45,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category;
+        $category->name = $request->name;
+        $category->save();
+        return redirect()->route('categories.index');
     }
 
     /**
