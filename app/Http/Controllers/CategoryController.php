@@ -18,18 +18,6 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         return view('category.index', ['categories' => $categories]);
-        
-        // Select * from categories where name = 'components'
-
-        // foreach($categories as $category) {
-        //     echo 'ID: ' . $category->id . 'Name: ' . $category->name . '<br>';
-        //     echo 'items: ' .'list of items <br>';
-        //     $items = $category->items()->get();
-        //     // print_r($items);
-        //     foreach($items as $item) {
-        //         echo 'items: ' . $item->name;
-        //     }
-        // }
     }
 
     /**
@@ -56,7 +44,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = Category::find($id)->first();
+        return view('category.show', ['category' => $category]);
     }
 
     /**
@@ -80,6 +69,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

@@ -12,6 +12,7 @@ List of categories
             <tr>
                 <td>ID</td>
                 <td>Name</td>
+                <td>Action</td>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,15 @@ List of categories
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ route('categories.show', $category->id) }}">View</a>
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-warning" type="submit">Delete</button>
+                        </form>
+
+                    </td>
                 </tr>
 
             @endforeach
