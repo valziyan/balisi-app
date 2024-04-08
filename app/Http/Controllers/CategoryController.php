@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::all(); // New object instance
         return view('category.index', ['categories' => $categories]);
     }
 
@@ -31,9 +31,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) // $_POST['name']
     {
-        $category = new Category;
+        $category = new Category; // new object
         $category->name = $request->name;
         $category->save();
         return redirect()->route('categories.index');
@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::find($id)->first();
+        $category = Category::find($id);
         return view('category.show', ['category' => $category]);
     }
 
@@ -53,7 +53,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('category.edit', ['category' => $category]);
     }
 
     /**
@@ -61,7 +62,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+        return redirect()->route('categories.index');
+
     }
 
     /**
