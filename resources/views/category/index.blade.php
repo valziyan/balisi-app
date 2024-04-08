@@ -6,6 +6,7 @@ List of categories
 
 @section('content')
     <h1>List of Categories</h1>
+    <img src="/images/ryan.jpg" width="40">
     <a class="btn btn-primary" href="{{ route('categories.create') }}">Add new Category</a>
     <table class="table">
         <thead>
@@ -20,7 +21,16 @@ List of categories
 
                 <tr>
                     <td>{{ $category->id }}</td>
-                    <td>{{ $category->name }}</td>
+                    <td>
+                        {{ $category->name }}
+                        List of items:
+                        <ul>
+                            @foreach( $category->items as $item )
+                            <li>{{ $item->name }}</li>
+                            @endforeach
+                            
+                        </ul>
+                    </td>
                     <td>
                         <a class="btn btn-sm btn-primary" href="{{ route('categories.show', $category->id) }}">View</a>
                         <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
